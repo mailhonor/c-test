@@ -22,8 +22,7 @@ function ccc($fn)
 		$news[]=$line;
 	}
 	$con = join("\n", $news);
-	file_put_contents("/usr/local/include/postfix_dev/$fn", $con);
-
+	file_put_contents("../postfix_dev/$fn", $con);
 }
 
 chdir("include");

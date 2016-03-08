@@ -21,19 +21,21 @@ which indent >/dev/null || _E echo "please install indent"
 touch  .postfix_dev_indent
 
 make -f Makefile.init makefiles \
-	        'CCARGS=-DHAS_MYSQL -DHAS_PCRE -DNO_NIS' \
-		        'AUXLIBS= -lmysqlclient -lz -lm -lpcre -lresolv ' || exit 1
+	        'CCARGS=-DNO_NIS -DHAS_PCRE -DHAS_MYSQL -I/usr/include/mysql/' \
+		        'AUXLIBS= -lmysqlclient -lpcre -lz -lm -lresolv ' || exit 1
 
 make || exit 1
 
 rm -f libpostfix_dev.a
 ar r libpostfix_dev.a src/tls/*.o src/master/*.o src/global/*.o src/util/*.o
-ranib libpostfix_dev.a
-mv libpostfix_dev.a /usr/local/lib/
+ranlib libpostfix_dev.a
 
-mkdir -p /usr/local/include/postfix_dev/
+mkdir -p postfix_dev
 php $selfdir/convert_include.php
 
-echo "OK"
+cd $selfdir
+cp -a  $pdir/postfix_dev .
+cp -a  $pdir/libpostfix_dev.a .
 
+echo "OK"
 
