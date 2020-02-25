@@ -23,5 +23,5 @@ include文件: /usr/local/include/postfix_dev/
 
 2. download lasted postfix source, untar
 
-3. excute ./build.sh postfix_source_dir
+3. execute ./build.sh postfix_source_dir
 
